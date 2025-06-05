@@ -1,0 +1,43 @@
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class project{
+
+    public static void main(String[] args) {
+        menu();  
+    }
+
+   public static void menu() {
+     Scanner rk = new Scanner(System.in);
+        System.out.println("\tr\tr MENU");
+        System.out.println("1. Add item");
+        System.out.println("2. View item");
+        System.out.println("3. Exit");
+        System.out.print("Enter your choice: ");
+
+        int n = rk.nextInt();
+   
+
+        if (n == 1) {
+            System.out.print("Enter a item: ");
+            String item = rk.nextLine();
+            item.add(item);
+            System.out.println("item added!");
+            
+        } else if (n == 2) {
+            System.out.println("item:");
+            for (String i : item) {
+                System.out.println("- " + i);
+            }
+            
+        } else if (choice == 3) {
+            System.out.println("Goodbye!");
+            return; 
+        } else {
+            System.out.println("Invalid choice. Try again.");
+            
+        }
+    }
+}
+
