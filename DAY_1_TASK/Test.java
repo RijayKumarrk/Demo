@@ -1,105 +1,49 @@
 package Project;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
-
-public class Test {
-
+public class Test_r {
 	
+    static ArrayList<String> itemList = new ArrayList<>();
 
-	    public static void main(String[] args) {
-	        Scanner scanner = new Scanner(System.in);
-	        int size, choice, position, value;
+    public static void main(String[] args) {
+        menu();  
+    }
 
-	        System.out.print("Enter the size of the array: ");
-	        size = scanner.nextInt();
-	        int[] arr = new int[100]; 
-	        int n = 0;
+    public static void menu() {
+        Scanner rk = new Scanner(System.in);
+        
+        while (true) {
+            System.out.println("\n\tr\tr MENU");
+            System.out.println("1. Add item");
+            System.out.println("2. View item");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
 
-	        System.out.println("Enter " + size + " elements:");
-	        for (int i = 0; i < size; i++) {
-	            arr[i] = scanner.nextInt();
-	            n++;
-	        }
+            int n = rk.nextInt();
+            rk.nextLine(); 
 
-	        do {
-	            System.out.println("\n--- Array Operations Menu ---");
-	            System.out.println("1. Insert");
-	            System.out.println("2. Delete");
-	            System.out.println("3. Update");
-	            System.out.println("4. Display");
-	            System.out.println("5. Exit");
-	            System.out.print("Enter your choice: ");
-	            choice = scanner.nextInt();
+            if (n == 1) {
+                System.out.print("Enter an item: ");
+                String item = rk.nextLine();
+                itemList.add(item);
+                System.out.println("Item added!");
 
-	            switch (choice) {
-	                case 1: 
-	                    if (n >= arr.length) {
-	                        System.out.println("Array is full, cannot insert.");
-	                        break;
-	                    }
-	                    System.out.print("Enter position to insert (0 to " + n + "): ");
-	                    position = scanner.nextInt();
-	                    if (position < 0 || position > n) {
-	                        System.out.println("Invalid position.");
-	                        break;
-	                    }
-	                    System.out.print("Enter value to insert: ");
-	                    value = scanner.nextInt();
-	                    for (int i = n; i > position; i--) {
-	                        arr[i] = arr[i - 1];
-	                    }
-	                    arr[position] = value;
-	                    n++;
-	                    System.out.println("Element inserted.");
-	                    break;
+            } else if (n == 2) {
+                System.out.println("Items:");
+                for (String i : itemList) {
+                    System.out.println("- " + i);
+                }
 
-	                case 2: 
-	                    System.out.print("Enter position to delete (0 to " + (n - 1) + "): ");
-	                    position = scanner.nextInt();
-	                    if (position < 0 || position >= n) {
-	                        System.out.println("Invalid position.");
-	                        break;
-	                    }
-	                    for (int i = position; i < n - 1; i++) {
-	                        arr[i] = arr[i + 1];
-	                    }
-	                    n--;
-	                    System.out.println("Element deleted.");
-	                    break;
+            } else if (n == 3) {
+                System.out.println("Goodbye!");
+                break;
 
-	                case 3: 
-	                    System.out.print("Enter position to update (0 to " + (n - 1) + "): ");
-	                    position = scanner.nextInt();
-	                    if (position < 0 || position >= n) {
-	                        System.out.println("Invalid position.");
-	                        break;
-	                    }
-	                    System.out.print("Enter new value: ");
-	                    value = scanner.nextInt();
-	                    arr[position] = value;
-	                    System.out.println("Element updated.");
-	                    break;
-
-	                case 4: 
-	                    System.out.print("Current Array: ");
-	                    for (int i = 0; i < n; i++) {
-	                        System.out.print(arr[i] + " ");
-	                    }
-	                    System.out.println();
-	                    break;
-
-	                case 5: 
-	                    System.out.println("Exiting program.");
-	                    break;
-
-	                default:
-	                    System.out.println("Invalid choice.");
-	            }
-	        } while (choice != 5);
-
-	    }
-	    
-	}
-
-
+            } else {
+                System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+}
 
