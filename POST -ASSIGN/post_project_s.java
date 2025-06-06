@@ -1,11 +1,13 @@
+package Project;
+
 import java.util.Scanner;
 
-public class Post_Project_2{
+public class post_project_s{
     public static int sumofdigits(int n) {
         if (n == 0)
             return 0;
 
-        return (n % 10) + sumOfDigits(n / 10);
+        return (n % 10) + sumofdigits(n / 10);
     }
 
     public static void main(String[] args) {
