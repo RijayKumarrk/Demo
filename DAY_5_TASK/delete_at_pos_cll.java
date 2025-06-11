@@ -1,149 +1,139 @@
 package project;
 
-import java.util.Scanner;
-
 public class delete_at_pos_cll {
-	    Node last;
+    Node last;
 
-	    class Node {
-	        int data;
-	        Node next;
+    class Node {
+        int data;
+        Node next;
 
-	        Node(int val) {
-	            data = val;
-	            next = null;
-	        }
-	    }
+        Node(int val) {
+            data = val;
+            next = null;
+        }
+    }
 
-	    public delete_at_pos_cll() {
-	        last = null;
-	    }
+    public delete_at_pos_cll() {
+        last = null;
+    }
 
+    public void insert(int val) {
+        Node newnode = new Node(val);
+        if (last == null) {
+            last = newnode;
+            last.next = last;
+        } else {
+            newnode.next = last.next;
+            last.next = newnode;
+            last = newnode;
+        }
+    }
 
-	    public void insert(int val) {
-	        Node newnode = new Node(val);
-	        if (last == null) {
-	            last = newnode;
-	            last.next = last;
-	        } else {
-	            newnode.next = last.next;
-	            last.next = newnode;
-	            last = newnode;
-	        }
-	    }
+    public void insertAtPosition(int val, int pos) {
+        Node newnode = new Node(val);
+        if (pos < 1) {
+            System.out.println("Invalid position.");
+            return;
+        }
 
-	    public void insertAtPosition(int val, int pos) {
-	        Node newnode = new Node(val);
-	        
+        if (last == null) {
+            if (pos == 1) {
+                last = newnode;
+                last.next = last;
+            } else {
+                System.out.println("Position out of bounds (empty list).");
+            }
+            return;
+        }
 
-	        if (last == null)
-	        {
+        if (pos == 1) {
+            newnode.next = last.next;
+            last.next = newnode;
+            return;
+        }
 
-	                last = newnode;
-	                last.next = last;
-	            } 
-	        
+        Node temp = last.next;
+        for (int i = 1; i < pos - 1 && temp != last; i++) {
+            temp = temp.next;
+        }
 
-	        if (pos == 1) {
-	            newnode.next = last.next;
-	            last.next = newnode;
-	            return;
-	        }
+        newnode.next = temp.next;
+        temp.next = newnode;
 
-	        Node temp = last.next;
-	        for (int i = 1; i < pos - 1 && temp != last; i++) {
-	            temp = temp.next;
-	        }
-	        
-	        newnode.next = temp.next;
-	        temp.next = newnode;
+        if (temp == last) {
+            last = newnode; 
+        }
+    }
 
-	        if (temp == last) {
-	            last = newnode; 
-	        }
-	    }
-	    
-	    public void deleteAtPosition(int pos) {
-	        if (last == null || pos < 1) {
-	            System.out.println("List is empty or invalid position.");
-	            return;
-	        }
+    public void deleteAtPosition(int pos) {
+        if (last == null || pos < 1) {
+            System.out.println("List is empty or invalid position.");
+            return;
+        }
 
-	        Node temp = last.next;
+        Node temp = last.next;
 
-	        
-	           
-	            if (last == last.next) {
-	                last = null;
-	            } else {
-	                last.next = temp.next; 
-	            }
-	            return;
-	    }
+        if (pos == 1) {
+            
+            if (last == last.next) {
+                last = null;
+            } else {
+                last.next = temp.next; // skip head
+            }
+            return;
+        }
 
-	    public void Display() {
-	        if (last == null) {
-	            System.out.println("List is empty.");
-	            return;
-	        }
+        Node prev = null;
+        for (int i = 1; i < pos && temp != last; i++) {
+            prev = temp;
+            temp = temp.next;
+        }
 
-	        Node temp = last.next;
-	        do {
-	            System.out.print(temp.data + " ");
-	            temp = temp.next;
-	        } while (temp != last.next);
-	        System.out.println();
-	    }
+        if (temp == last && pos != 1) {
+            if (prev != null) {
+                prev.next = temp.next;
+                last = prev;
+            }
+        } else if (temp != last.next) {
+            prev.next = temp.next;
+        } else {
+            System.out.println("Position out of bounds.");
+        }
+    }
 
-	   
+    public void Display() {
+        if (last == null) {
+            System.out.println("List is empty.");
+            return;
+        }
 
-	    public static void main(String[] args) {
-	    	delete_at_pos_cll rk = new delete_at_pos_cll();
-	        Scanner rijay = new Scanner(System.in);
-	        int choice;
+        Node temp = last.next;
+        do {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        } while (temp != last.next);
+        System.out.println();
+    }
 
-	        do {
-	            System.out.println("\t\t Circular Linked List Menu ");
-	            System.out.println("1. Insert at end");
-	            System.out.println("2. Insert at position");
-	            System.out.println("3. Delete at position");
-	            System.out.println("4. Display");
-	            System.out.println("0. Exit");
-	            System.out.print("Enter your choice: ");
-	            choice = rijay.nextInt();
+    public static void main(String[] args) {
+        delete_at_pos_cll rk = new delete_at_pos_cll();
 
-	            switch (choice) {
-	                case 1:
-	                    System.out.print("Enter value to insert: ");
-	                    int val1 = rijay.nextInt();
-	                    rk.insert(val1);
-	                    break;
-	                case 2:
-	                    System.out.print("Enter value to insert: ");
-	                    int val2 = rijay.nextInt();
-	                    System.out.print("Enter position: ");
-	                    int pos1 = rijay.nextInt();
-	                    rk.insertAtPosition(val2, pos1);
-	                    break;
-	                case 3:
-	                    System.out.print("Enter position to delete: ");
-	                    int pos2 = rijay.nextInt();
-	                    rk.deleteAtPosition(pos2);
-	                    break;
-	                case 4:
-	                    rk.Display();
-	                    break;
-	                case 0:
-	                    System.out.println("Exiting...");
-	                    break;
-	                default:
-	                    System.out.println("Invalid choice. Try again.");
-	            }
-	        } while (choice != 0);
+        rk.insert(10);
+        rk.insert(20);
+        rk.insert(30);
+        rk.insert(40);
+        System.out.println("Original List:");
+        rk.Display(); 
 
-	    }
-
-	}
-
-
-
+        rk.insertAtPosition(15, 2);
+        rk.insertAtPosition(5, 1);
+        rk.insertAtPosition(50, 7);
+        System.out.println("After Insertions:");
+        rk.Display(); 
+        rk.deleteAtPosition(1);
+        rk.deleteAtPosition(3);
+        rk.deleteAtPosition(5);
+        System.out.println("After Deletions:");
+        rk.Display(); 
+    }
+}

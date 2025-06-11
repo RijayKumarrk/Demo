@@ -29,6 +29,37 @@ public class cll {
 	            last = newnode;    
 	        }
 	    }
+		 public void insertpos(int val, int pos) {
+	        Node newnode = new Node(val);
+	        
+
+	        if (last == null)
+	        {
+
+	                last = newnode;
+	                last.next = last;
+	            } 
+	        
+
+	        if (pos == 1) {
+	            newnode.next = last.next;
+	            last.next = newnode;
+	            return;
+	        }
+
+	        Node temp = last.next;
+	        for (int i = 1; i < pos - 1 && temp != last; i++) {
+	            temp = temp.next;
+	        }
+	        
+	        newnode.next = temp.next;
+	        temp.next = newnode;
+
+	        if (temp == last) {
+	            last = newnode; 
+	        }
+	    }
+	    
 
 	    public void Display() {
 
@@ -47,6 +78,7 @@ public class cll {
 	        rk.insert(20);
 	        rk.insert(30);
 	        rk.insert(40);
+		    rk.insertpos(300,3);
 
 	        rk.Display(); 
 	    }
