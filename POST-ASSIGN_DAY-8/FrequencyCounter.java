@@ -1,6 +1,5 @@
 public class FrequencyCounter {
 
-    // Function to find the first occurrence of a key
     public static int firstOccurrence(int[] arr, int key) {
         int left = 0, right = arr.length - 1, result = -1;
         while (left <= right) {
@@ -8,7 +7,7 @@ public class FrequencyCounter {
 
             if (arr[mid] == key) {
                 result = mid;
-                right = mid - 1; // Keep searching on the left side
+                right = mid - 1; 
             } else if (arr[mid] < key) {
                 left = mid + 1;
             } else {
@@ -17,8 +16,6 @@ public class FrequencyCounter {
         }
         return result;
     }
-
-    // Function to find the last occurrence of a key
     public static int lastOccurrence(int[] arr, int key) {
         int left = 0, right = arr.length - 1, result = -1;
         while (left <= right) {
@@ -26,7 +23,7 @@ public class FrequencyCounter {
 
             if (arr[mid] == key) {
                 result = mid;
-                left = mid + 1; // Keep searching on the right side
+                left = mid + 1; 
             } else if (arr[mid] < key) {
                 left = mid + 1;
             } else {
@@ -35,16 +32,19 @@ public class FrequencyCounter {
         }
         return result;
     }
-
-    // Function to count frequency using binary search
     public static int countFrequency(int[] arr, int key) {
         int first = firstOccurrence(arr, key);
         if (first == -1) {
-            return 0; // Key not found
+            return 0; 
         }
         int last = lastOccurrence(arr, key);
         return last - first + 1;
     }
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 2, 2, 3, 4, 5, 5, 5, 5, 6}; 
+        int key = 5;
 
-    // Main method to test
-    public static void main(St
+        int frequency = countFrequency(arr, key);
+        System.out.println("Frequency of " + key + ": " + frequency);
+    }
+}
